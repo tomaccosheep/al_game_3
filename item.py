@@ -23,6 +23,9 @@ class Spell(Item):
         super().__init__(name, 'spell', param[name][0])
     # }}
 
+    def __str__(self):
+        return self.name
+
 class Furniture(Item):
     # Furniture can have stuff in it. Still in alpha, so
     # I just put nothing in barrels and a fire spell in
@@ -37,6 +40,12 @@ class Furniture(Item):
         self.has = param[name][1]
     # }}
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
 class Maker_maker(Item):
     # Makers are experimental funiture that make more items when placed. Not yet implemented. Love spell not yet implemented.
     # {{
@@ -46,3 +55,9 @@ class Maker_maker(Item):
         self.makes_type = param[name][1]
         super().__init__(name, 'maker', 0)
     # }}
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name

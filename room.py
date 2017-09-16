@@ -1,5 +1,5 @@
 import item
-from random import randint
+from random import randint, choice
 class Coord():
     def __init__(self, in_coord, item=None):
         # Every set of coordinates has 3 points on the z-axis to place
@@ -58,7 +58,7 @@ class Coord():
         if self.z0 != None:
             if self.z1 != None:
                 if self.z2 != None:
-                    print("This space is occupied"):
+                    print("This space is occupied")
                 else:
                     self.z2 = item_in
             else:
@@ -89,9 +89,83 @@ class Coord():
         # }}
 
     def take(self, myitem):
-        
+        # Take the item from it's z-coordinate, and
+        # let everything else fall one space
+        # {{
+        if str(z0) == myitem:
+            returnie = z0
+            z0 = z1
+            z1 = z2
+            z2 = None
+            return returnie
+        elif str(z1) == myitem:
+            returnie = z1
+            z1 = z2
+            z2 = None
+            return returnie
+        elif str(z2) == myitem:
+            returnie = z2
+            z2 = None
+            return returnie
+        # }}
 
-                
+    def take_z0(self):
+        returnie = self.z0
+        self.z0 = self.z1
+        self.z1 = self.z2
+        self.z2 = None
+
+    def update():
+        pass
+
+# This creates a room with 25 by 25 coordinate objects, and then it randomly places
+# barrels and boxes in the room. It also assigns the room one map coordinate
+# {{
+class Room():
+    def __init__(self, characters, map_coord):
+        self.characters = characters
+        self.map_coord = map_coord
+        self.coord_dict = {}
+
+        for i in range(0, 25):
+            for j in range(0, 25):
+                self.coord_dict[(i, j)] = Coord((i, j))
+
+        random_count = randint(0, 100)
+        furniture_list = ['barrel', 'box']
+        while random_count < 200:
+            in_item = item.Furniture(choice(furniture_list))
+            self.coord_dict[(randint(0, 24), randint(0, 24))].place(in_item)
+            random_count += 1
+    def __str__(self):
+        return str(self.map_coord)
+
+    def __repr__(self):
+        return str(self.map_coord)
+
+    def update_characters(self, characters):
+        self.characters = list(characters)
+# }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

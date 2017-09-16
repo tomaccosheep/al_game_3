@@ -1,3 +1,4 @@
+import item
 class Character:
     def __init__(self, name, location, health = 100):
         self.location = location
@@ -14,6 +15,40 @@ class Player(Character):
     def __init__(self):
         super().__init__('Melgas', (24, 12), 500)
         self.inventory = []
+        self.inventory_str = ''
 
     def inv_out(self):
         return str(self.inventory)
+
+    def inv_update(self):
+        self.inventory = sorted(self.inventory, key=str)
+        invstr = 'inventory: '
+        index_count = 1
+        inv_count = 1
+        holding_index = False
+        for i in range(0, len(self.inventory)):
+            if i == len(self.inventory) - 1:
+                if holding_index:
+                    invstr += str(self.inventory[i]) + '[' + str(index_count) + ']'
+                    inv_count = 0
+                else:
+                    invstr += str(self.inventory[i])
+                    inv_count = 0
+            elif str(self.inventory[i]) == str(self.inventory[i + 1]):
+                holding_index = True
+                index_count += 1
+            else:
+                if holding_index:
+                    invstr += str(self.inventory[i]) + '[' + str(index_count) + '], '
+                    index_count = 1
+                    holding_index = False
+                    inv_count += 1
+                else:
+                    invstr += str(self.inventory[i]) + ', '
+                    inv_count += 1
+            if inv_count > 5:
+                inv_count = 0
+                invstr += '\n'
+        self.inventory_str = invstr
+        return None
+        
