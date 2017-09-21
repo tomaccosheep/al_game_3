@@ -1,0 +1,6 @@
+transcribed?
+
+y - character
+n - game_main
+n - item
+n - room

@@ -16,6 +16,7 @@ class Player(Character):
         super().__init__('Melgas', (24, 12), 500)
         self.inventory = []
         self.inventory_str = ''
+        self.row_count = 1
 
     def inv_out(self):
         return str(self.inventory)
@@ -26,6 +27,7 @@ class Player(Character):
         index_count = 1
         inv_count = 1
         holding_index = False
+        row_count = 1
         for i in range(0, len(self.inventory)):
             if i == len(self.inventory) - 1:
                 if holding_index:
@@ -46,9 +48,11 @@ class Player(Character):
                 else:
                     invstr += str(self.inventory[i]) + ', '
                     inv_count += 1
-            if inv_count > 5:
+            if inv_count > 1:
                 inv_count = 0
                 invstr += '\n'
+                row_count += 1
+        self.row_count = row_count
         self.inventory_str = invstr
         return None
         

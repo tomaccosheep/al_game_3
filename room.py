@@ -133,7 +133,7 @@ class Room():
 
         random_count = randint(0, 100)
         furniture_list = ['barrel', 'box']
-        while random_count < 200:
+        while random_count < 150:
             in_item = item.Furniture(choice(furniture_list))
             self.coord_dict[(randint(0, 24), randint(0, 24))].place(in_item)
             random_count += 1
@@ -145,6 +145,8 @@ class Room():
 
     def update_characters(self, characters):
         self.characters = list(characters)
+
+    
 # }
 
 
